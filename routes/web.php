@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\JawabanPesertasController as AdminJawabanPesertasController;
+use App\Http\Controllers\Admin\PesertasController as AdminPesertasController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +18,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('jawabanPesertas', App\Http\Controllers\JawabanPesertasController::class);
-Route::resource('pesertas', App\Http\Controllers\PesertasController::class);
+Route::resource('home', HomeController::class);
+
+
+Route::group(['middleware' => ['role:admin', 'auth'], 'prefix' => 'admin',], function () {
+    Route::resource('jawabanPesertas', AdminJawabanPesertasController::class);
+    Route::resource('pesertas', AdminPesertasController::class);
+});
+
+route::group(['middleware' => ['role:peserta', 'auth'], 'prefix' => 'english-test'], function () {
+    // Route::resource('home' , HomeController::class);
+});

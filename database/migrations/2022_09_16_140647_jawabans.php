@@ -17,7 +17,7 @@ class Jawabans extends Migration
             $table->increments('id');
             $table->string('jawaban');
             $table->integer('is_true');
-            $table->integer('id_soal');
+            $table->foreignId('soals_id')->constrained('soals')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
