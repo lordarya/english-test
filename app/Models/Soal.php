@@ -14,4 +14,9 @@ class Soal extends Model
         'section',
         'level',
     ];
+
+    public function jawaban()
+    {
+        return $this->hasOne(Jawaban::class);
+    }
 }

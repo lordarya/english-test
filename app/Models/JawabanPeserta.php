@@ -13,4 +13,9 @@ class JawabanPeserta extends Model
         'is_checked',
         'is_true',
     ];
+
+    public function soal()
+    {
+        return $this->belongsTo(Soal::class, 'soals_id');
+    }
 }

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\JawabanPeserta;
+use App\Models\User;
 
-class JawabanPesertasController extends Controller
+class PesertasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,11 @@ class JawabanPesertasController extends Controller
      */
     public function index()
     {
-        
+        $pesertas = User::latest()
+            ->where('level', '=', 1)
+            ->paginate(5);
+        return view('pesertas.index', compact('pesertas'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -46,14 +51,7 @@ class JawabanPesertasController extends Controller
      */
     public function show($id)
     {
-        $jawabans = JawabanPeserta::join('soals','jawaban_pesertas.id_soal','=','soals.id')
-        ->where('is_checked','=',0) 
-        ->where('id_user','=',$id) 
-        ->where('soals.jenis','=',1)
-        ->paginate(5);
-      
-        return view('jawabanPesertas.index',compact('jawabans'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        //
     }
 
     /**
@@ -76,14 +74,7 @@ class JawabanPesertasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'is_checked' => 'required',
-            
-        ]);
-        JawabanPeserta::find($id)->update($request->all());
-
-        return redirect()->route('jawabanPesertas.index')
-        ->with('success', 'data Berhasil Diupdate');
+        //
     }
 
     /**
