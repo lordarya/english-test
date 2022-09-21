@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Soal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\New_;
 
 class HomeController extends Controller
@@ -26,6 +27,15 @@ class HomeController extends Controller
     public function index()
     {
         // var_dump($data);
-        return view('home');
+        if (Auth::user()->hasRole('admin')) {
+            return redirect()->route('pesertas.index');
+        } elseif (Auth::user()->hasRole('peserta')) {
+            return redirect()->route
+        }
+
+        // echo Auth::user()->hasRole('admin');
+
+        // return redirect()->route('pesertas.index');
+
     }
 }
