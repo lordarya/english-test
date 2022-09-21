@@ -52,7 +52,7 @@ class JawabanPesertasController extends Controller
             ->where('soals.jenis', '=', 1)
             ->paginate(5);
 
-        return view('jawabanPesertas.index', compact('jawabans'))
+        return view('admin.jawabanPesertas.index', compact('jawabans'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

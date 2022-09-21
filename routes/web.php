@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\JawabanPesertasController as AdminJawabanPesertasController;
 use App\Http\Controllers\Admin\PesertasController as AdminPesertasController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Peserta\DashboardPesertaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,5 +37,5 @@ Route::group(['middleware' => ['role:admin', 'auth'], 'prefix' => 'admin',], fun
 });
 
 route::group(['middleware' => ['role:peserta', 'auth'], 'prefix' => 'english-test'], function () {
-    // Route::resource('home' , HomeController::class);
+    Route::resource('dashboard', DashboardPesertaController::class);
 });

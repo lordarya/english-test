@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserDetail;
 
 class PesertasController extends Controller
 {
@@ -15,10 +16,10 @@ class PesertasController extends Controller
      */
     public function index()
     {
-        $pesertas = User::latest()
-            ->where('level', '=', 1)
+        $pesertas = UserDetail::latest()
+            ->where('level', '=', 1)->with('user')
             ->paginate(5);
-        return view('pesertas.index', compact('pesertas'))
+        return view('admin.pesertas.index', compact('pesertas'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
