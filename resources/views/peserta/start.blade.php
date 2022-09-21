@@ -47,8 +47,23 @@
                             </table>
                         </form>
                         <p class="card-text">Klik Start Saat Memulai Test</p>
-                        <a @if ($detail->is_attempt == false) href=" {{ 'https://google.com' }} " @endif
-                            class="btn @if ($detail->is_attempt == true) btn-secondary @endif @if ($detail->is_attempt == false) btn-info @endif">Start</a>
+                        <div class="row">
+                            <div class="col-md-10"><a
+                                    @if ($detail->is_attempt == false) href=" {{ route('listeningsection.index') }} " @endif
+                                    class="btn @if ($detail->is_attempt == true) btn-secondary @else btn-info @endif">Start</a>
+                            </div>
+                            <div class="col-md-1">
+                                <a class="btn btn-danger" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>

@@ -16,7 +16,6 @@ class DashboardPesertaController extends Controller
      */
     public function index()
     {
-
         $detail = UserDetail::where('users_id', Auth::user()->id)->first();
         return view('peserta.start', compact('detail'));
     }
