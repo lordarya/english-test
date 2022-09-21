@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\JawabanPesertasController as AdminJawabanPesertas
 use App\Http\Controllers\Admin\PesertasController as AdminPesertasController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Peserta\DashboardPesertaController;
+use App\Http\Controllers\Peserta\SectionLinsteningController;
+use App\Http\Controllers\Peserta\SectionReadingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -38,4 +40,12 @@ Route::group(['middleware' => ['role:admin', 'auth'], 'prefix' => 'admin',], fun
 
 route::group(['middleware' => ['role:peserta', 'auth'], 'prefix' => 'english-test'], function () {
     Route::resource('dashboard', DashboardPesertaController::class);
+});
+
+route::group(['middleware' => ['role:peserta', 'permission:listeningsection', 'auth'], 'prefix' => 'english-test'], function () {
+    Route::resource('listeningsection', SectionLinsteningController::class);
+});
+
+route::group(['middleware' => ['role:peserta', 'permission:readingsection', 'auth'], 'prefix' => 'english-test'], function () {
+    Route::resource('readingsection', SectionReadingController::class);
 });

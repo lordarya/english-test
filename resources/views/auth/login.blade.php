@@ -26,7 +26,7 @@
                     <div class="px-5 ms-xl-4 text-center" style="margin-top: 10px;">
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                             style="width: 185px;" alt="logo">
-                        <h4 class="mt-1 mb-5 pb-1">English Test</h4>
+                        <h4 class="mt-1 mb-5 pb-1">Uji Kompetensi Bahasa Inggris</h4>
                     </div>
 
                     <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4">
