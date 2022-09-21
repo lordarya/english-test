@@ -40,7 +40,7 @@
                 <td>{{ $jawaban->level }}</td>
                 <td>
                     <form action="{{ route('pesertas.destroy', $jawaban->id) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('jawabanPesertas.show', $jawaban->id) }}">Show</a>
+                        <a class="btn btn-info" href="{{ route('jawabanPesertas.show', $jawaban->user->id) }}">Show</a>
                         @csrf
                         @method('PUT')
 
