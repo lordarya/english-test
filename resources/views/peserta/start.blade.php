@@ -48,9 +48,12 @@
                         </form>
                         <p class="card-text">Klik Start Saat Memulai Test</p>
                         <div class="row">
-                            <div class="col-md-10"><a
-                                    @if ($detail->is_attempt == false) href=" {{ route('listeningsection.index') }} " @endif
-                                    class="btn @if ($detail->is_attempt == true) btn-secondary @else btn-info @endif">Start</a>
+                            <div class="col-md-10">
+                                <form action="{{ route('dashboard.store') }}" method="post">
+                                    @csrf
+                                    <button @if ($detail->is_attempt == true) disabled @endif
+                                        class="btn btn-info">Start</button>
+                                </form>
                             </div>
                             <div class="col-md-1">
                                 <a class="btn btn-danger" href="{{ route('logout') }}"

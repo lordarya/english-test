@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSoalsTable extends Migration
+class CreateNarasisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateSoalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('soals', function (Blueprint $table) {
+        Schema::create('narasis', function (Blueprint $table) {
             $table->id();
-            $table->string('soal')->nullable();
-            $table->integer('section');
-            $table->integer('jenis');
-            $table->integer('level');
+            $table->foreignId('soals_id')->constrained('soals')->onUpdate('cascade')->onDelete('cascade');
+            $table->text('narasi');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateSoalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('soals');
+        Schema::dropIfExists('narasis');
     }
 }

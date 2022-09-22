@@ -46,7 +46,7 @@
                         <a class="dropdown d-flex align-items-center hidden-arrow nav-link" id="navbarDropdown"
                             href="#" role="button" style="text-decoration: none; color: black; font-size: 10pt;"
                             href="#" aria-expanded="false" data-bs-toggle="dropdown">
-                            <img src="../dist/img/user.jpg" class="rounded-circle" height="40" />
+                            <img src="{{ asset('dist/img/user.jpg') }}" class="rounded-circle" height="40" />
                             <div class="d-sm-none d-lg-inline-block" style="padding-left: 5px;">
                                 {{ Auth::user()->name }}</div>
                         </a>
