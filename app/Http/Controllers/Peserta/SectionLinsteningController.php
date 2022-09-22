@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Jawaban;
 use App\Models\JawabanPeserta;
 use App\Models\Soal;
+use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,7 @@ class SectionLinsteningController extends Controller
         $detail = UserDetail::where('users_id', Auth::user()->id)->first();
         $soals = Soal::where('level', $detail->level)->get();
         $jawabans = Jawaban::inRandomOrder()->get();
+        $soalsection = Soal::where('level', $detail->level)->where('section', 1)->get();
 
         $jawabanpesertas = JawabanPeserta::where('users_id', Auth::user()->id)->get();
         if ($jawabanpesertas->count() <= 0) {
@@ -53,7 +55,7 @@ class SectionLinsteningController extends Controller
         $lastSoal = Soal::orderBy('id', 'DESC')->first();
         $lastSoal = $lastSoal->id;
 
-        return view('peserta.listening', compact('soals', 'jawabans', 'lastJawaban', 'lastSoal', 'jawabanpesertas'));
+        return view('peserta.listening', compact('soalsection', 'jawabans', 'lastJawaban', 'lastSoal', 'jawabanpesertas'));
     }
 
     /**
@@ -99,7 +101,6 @@ class SectionLinsteningController extends Controller
         JawabanPeserta::where('users_id', Auth::user()->id)->where('soals_id', $soals_id)->update([
             'jawabans_id' => $jawabans_id,
             'is_checked' => '1',
-            'jawaban' => $jawaban,
             'is_true' => $is_true
         ]);
     }
@@ -135,7 +136,13 @@ class SectionLinsteningController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo 'tet';
+        $user = User::find(Auth::user()->id);
+
+        $user->syncPermissions([]);
+        $user->givePermissionTo('reading');
+        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+
+        return redirect()->route('readingsection.index');
     }
 
     /**

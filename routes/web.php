@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Peserta\DashboardPesertaController;
 use App\Http\Controllers\Peserta\SectionLinsteningController;
 use App\Http\Controllers\Peserta\SectionReadingController;
+use App\Http\Controllers\Peserta\StoreJawabanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,12 +41,13 @@ Route::group(['middleware' => ['role:admin', 'auth'], 'prefix' => 'admin',], fun
 
 route::group(['middleware' => ['role:peserta', 'auth'], 'prefix' => 'english-test'], function () {
     Route::resource('dashboard', DashboardPesertaController::class);
+    Route::resource('storejawaban', StoreJawabanController::class);
 });
 
-route::group(['middleware' => ['role:peserta', 'permission:listeningsection', 'auth'], 'prefix' => 'english-test'], function () {
+route::group(['middleware' => ['role:peserta', 'permission:listening', 'auth'], 'prefix' => 'listening'], function () {
     Route::resource('listeningsection', SectionLinsteningController::class);
 });
 
-route::group(['middleware' => ['role:peserta', 'permission:readingsection', 'auth'], 'prefix' => 'english-test'], function () {
+route::group(['middleware' => ['role:peserta', 'permission:reading', 'auth'], 'prefix' => 'reading'], function () {
     Route::resource('readingsection', SectionReadingController::class);
 });
