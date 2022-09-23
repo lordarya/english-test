@@ -3,14 +3,7 @@
 @section('content')
     <input type="hidden" id="jawabancount" value="{{ $lastJawaban }}">
     <input type="hidden" id="id_soal" value="{{ $soal->id }}">
-    <input type="hidden" id='url' value="{{ route('readingsection.store') }}">
-
-    {{-- <form action="{{ route('readingsection.store') }}" method="post">
-        @csrf
-        <input type="hidden" value="o">
-        <button class="btn btn-danger">Store</button>
-    </form> --}}
-
+    <input type="hidden" id='url' value="{{ URL::to('/') }}">
     <!-- Main Program -->
     <main class="py-4">
         <section class="content">
@@ -124,6 +117,9 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                <br>
+                                <a href="{{ route('storejawaban.index') }}" class="btn btn-info float-left">Finish</a>
+
                             </div>
                         </div>
                     </div>

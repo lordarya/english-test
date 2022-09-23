@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Peserta;
 use App\Http\Controllers\Controller;
 use App\Models\Jawaban;
 use App\Models\JawabanPeserta;
+use App\Models\User;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +19,7 @@ class StoreJawabanController extends Controller
      */
     public function index()
     {
-        //
+        return view('peserta.finish');
     }
 
     /**
@@ -27,7 +29,7 @@ class StoreJawabanController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**
@@ -74,7 +76,7 @@ class StoreJawabanController extends Controller
      */
     public function show($id)
     {
-        //
+        // echo 'tess';
     }
 
     /**
@@ -85,7 +87,7 @@ class StoreJawabanController extends Controller
      */
     public function edit($id)
     {
-        //
+        // echo 'test';
     }
 
     /**
@@ -97,7 +99,17 @@ class StoreJawabanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $user = User::find(Auth::user()->id);
+
+        $user->syncPermissions([]);
+        // $user->givePermissionTo('reading');
+        UserDetail::where('users_id', $user->id)->update([
+            'is_attempt' => '1'
+        ]);
+        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+
+        return redirect()->route('dashboard.index');
     }
 
     /**
