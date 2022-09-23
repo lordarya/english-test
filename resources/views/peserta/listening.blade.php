@@ -153,7 +153,7 @@
                     var test = jawabanpeserta.match(/(.+)\.(.+)/);
                     $.ajax({
                         type: 'POST',
-                        url: 'http://127.0.0.1:8000/english-test/storejawaban',
+                        url: '/english-test/storejawaban',
                         data: {
                             jawabans_id: test[1],
                             soals_id: test[2]
@@ -176,7 +176,7 @@
                     });
                     $.ajax({
                         type: 'POST',
-                        url: 'http://127.0.0.1:8000/english-test/storejawaban',
+                        url: '/english-test/storejawaban',
                         data: {
                             jawaban: essay[index].val(),
                             soals_id: index
