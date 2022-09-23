@@ -20,22 +20,9 @@ class SectionReadingController extends Controller
      */
     public function index()
     {
-        // $soal = Soal::where('level', 1)->where('section', 2)->first();
+        $soal = Soal::where('level', 1)->where('section', 2)->first();
 
-        // return redirect()->route('readingsection.show', $soal->id);
-
-        $detail = $detail = UserDetail::where('users_id', Auth::user()->id)->first();
-        $soalsection = Soal::where('level', $detail->level)->where('section', 2)->get();
-        $jawabans = Jawaban::inRandomOrder()->get();
-
-        $soal = Soal::find(6);
-        $narasi = Narasi::where('soals_id', $soal->id)->first();
-        $jawabanpesertas = JawabanPeserta::where('users_id', Auth::user()->id)->get();
-
-        $lastJawaban = Jawaban::orderBy('id', 'DESC')->first();
-        $lastJawaban = $lastJawaban->id;
-
-        return view('peserta.reading', compact('soal', 'narasi', 'soalsection', 'jawabans', 'jawabanpesertas', 'lastJawaban'));
+        return redirect()->route('readingsection.show', $soal->id);
     }
 
     /**

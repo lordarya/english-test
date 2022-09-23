@@ -26,16 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // var_dump($data);
         if (Auth::user()->hasRole('admin')) {
             return redirect()->route('pesertas.index');
         } elseif (Auth::user()->hasRole('peserta')) {
             return redirect()->route('dashboard.index');
         }
-
-        // echo Auth::user()->hasRole('admin');
-
-        // return redirect()->route('pesertas.index');
-
     }
 }
