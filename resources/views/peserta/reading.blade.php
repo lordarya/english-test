@@ -151,7 +151,7 @@
                     var jawabanpeserta = jawaban[index].val();
                     $.ajax({
                         type: 'POST',
-                        url: 'http://127.0.0.1:8000/english-test/storejawaban',
+                        url: '/english-test/storejawaban',
                         data: {
                             jawabans_id: jawabanpeserta,
                             soals_id: id_soal
@@ -172,7 +172,7 @@
                 });
                 $.ajax({
                     type: 'POST',
-                    url: 'http://127.0.0.1:8000/english-test/storejawaban',
+                    url: '/english-test/storejawaban',
                     data: {
                         jawaban: essay.val(),
                         soals_id: id_soal
