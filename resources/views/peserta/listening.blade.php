@@ -21,12 +21,13 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-1 px-2 bg-danger"><i class="fas fa-stopwatch"></i> Timer:</div>
-                                    <div class="col-md-1 bg-success">00:00:00</div>
+                                    <div id="timer" class="col-md-1 bg-success">00:00:00</div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="row justify-content-center">
-                                    <audio controls="true">
+                                    <button id="myBtn" onclick="play()" type="button">Play Audio</button>
+                                    <audio id="myAudio">
                                         <source src="/dist/img/High School in Jakarta.mp3" type="audio/mpeg">
                                     </audio>
                                 </div>
@@ -133,6 +134,43 @@
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script>
+
+
+var aud = document.getElementById("myAudio");
+function play() { 
+  aud.play(); 
+  document.getElementById("myBtn").disabled = true;
+} 
+aud.onended = function() {
+  alert("The audio has ended");
+};
+
+document.getElementById('timer').innerHTML =
+  00 + ":" + 110;
+startTimer();
+
+function startTimer() {
+  var presentTime = document.getElementById('timer').innerHTML;
+  var timeArray = presentTime.split(/[:]+/);
+  var m = timeArray[0];
+  var s = checkSecond((timeArray[1] - 1));
+  if(s==59){m=m-1}
+  if(m<0){alert('time out')}
+  
+  document.getElementById('timer').innerHTML =
+    m + ":" + s;
+  setTimeout(startTimer, 1000);
+}
+
+function checkSecond(sec) {
+  if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+  if (sec < 0) {sec = "59"};
+  return sec;
+}
+
+
+
+
         $(document).ready(function() {
             let countjawaban = $('#jawabancount').val();
             let countsoal = $('#soalcount').val();

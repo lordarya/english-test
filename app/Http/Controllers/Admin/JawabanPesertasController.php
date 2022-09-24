@@ -46,9 +46,9 @@ class JawabanPesertasController extends Controller
      */
     public function show($id)
     {
-        $jawabans = JawabanPeserta::join('soals', 'jawaban_pesertas.id_soal', '=', 'soals.id')
+        $jawabans = JawabanPeserta::join('soals', 'jawaban_pesertas.soals_id', '=', 'soals.id')
             ->where('is_checked', '=', 0)
-            ->where('id_user', '=', $id)
+            ->where('users_id', '=', $id)
             ->where('soals.jenis', '=', 1)
             ->paginate(5);
 
